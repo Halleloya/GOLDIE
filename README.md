@@ -6,6 +6,8 @@ If you have any concerns or suggestions, please email lyhao[AT]cs.columbia.edu.
 
 Modification from version one: build a web app, abandon the access control mechanism in the previous version.
 
+We would like to thank Yifan for his contribution on building the initial prototype. 
+
 ## How to bootstrap the project
 
 1. `git clone git@github.com:Halleloya/Droit_v2.git`.
