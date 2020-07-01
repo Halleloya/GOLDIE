@@ -12,7 +12,7 @@ We would like to thank Yifan for his contribution on building the initial protot
 
 1. `git clone git@github.com:Halleloya/Droit_v2.git`.
 2. Install dependencies `pip install -r requirements.txt`.
-3. Configure the database.
+3. Configure the database, e.g., store your database in data/db, and `mongod --dbpath data/db`
 4. Run the shell. 
 
 Sidenotes:
