@@ -6,7 +6,7 @@ If you have any concerns or suggestions, please email lyhao[AT]cs.columbia.edu.
 
 Modification from version one: build a web app, abandon the access control mechanism in the previous version.
 
-We would like to thank Yifan for his contribution on building the initial prototype. 
+We would like to thank Yifan for his contribution on the implementation of the  prototype. 
 
 ## How to bootstrap the project
 
@@ -17,7 +17,7 @@ We would like to thank Yifan for his contribution on building the initial protot
 
 Sidenotes:
 
-To run a local database `python -m Droit.run`
+To run a local directory `python -m Droit.run`
 
 To initialize database and start the application server as one go, use `./setup.sh` in `/Droit/src` (applied to a single server).
 
