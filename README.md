@@ -17,6 +17,8 @@ We would like to thank Yifan for his contribution on building the initial protot
 
 Sidenotes:
 
+To run a local database `python -m Droit.run`
+
 To initialize database and start the application server as one go, use `./setup.sh` in `/Droit/src` (applied to a single server).
 
 To initialize database at an application server, use `python3 -m Droit.level1.init_db`.
