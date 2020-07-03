@@ -26,7 +26,7 @@ SingleConfig = {
     # OAUth2
     'OAUTH2_JWT_ENABLED': True,
     'OAUTH2_JWT_ISS': 'http://localhost:4999/',
-    'OAUTH2_JWT_KEY': 'level1-secret',
+    'OAUTH2_JWT_KEY': 'SingleDirectory-secret',
     'OAUTH2_JWT_ALG': 'HS256',
     'OAUTH2_JWT_EXP': 3600
 }
