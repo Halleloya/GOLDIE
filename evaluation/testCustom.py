@@ -3,6 +3,12 @@ import requests
 import time
 import click
 
+"""
+Three script query samples: 
+number of buses running inside a polygon; 
+average data of thermometers; 
+number of lights that are on.
+"""
 
 @click.command()
 @click.option('--num_test', default=3, type=int, help="number of random tests, by default is 1")
