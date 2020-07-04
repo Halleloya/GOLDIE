@@ -7,7 +7,7 @@ thingIDs = ["urn:dev:wot:com:example:servient:QM3hYyAF", "urn:dev:wot:com:exampl
 
 @click.command()
 @click.option('--num_test', default=3, type=int, help="number of random tests, by default is 10")
-@click.option('--location', default="SingleDirectory", type=str, help="directory name you want to search, default is None")
+@click.option('--location', default="SingleDirectory", type=str, help="directory name you want to search, default is SingleDirectory")
 @click.option('--thing_id', default=None, type=str, help="id of TD you want to search, default is None")
 def main(num_test, location, thing_id):
     totalTime = 0
