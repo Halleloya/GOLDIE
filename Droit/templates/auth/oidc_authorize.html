@@ -1,0 +1,23 @@
+{% extends "layout.html" %}
+
+{% block link %}
+
+{% endblock link %}
+
+{% block body %}
+<div class="container">
+    <h3>Relying Party <span class="text-primary">{{grant.client.client_name}}</span>  is requesting user <span class="text-primary">{{ current_user.username }}</span> 's authorization:</h3>
+    <ul class="m-5">
+        {% for scope in grant.request.scope.split() %}
+        <li><h5>{{scope}}</h5></li>
+        {% endfor %}
+    </ul>
+    
+    <form action="" method="POST">
+        <button type="submit" class="btn btn-primary" name="confirm">Confirm</button>
+        <button type="submit" class="btn btn-primary" name="cancel">Cancel</button>
+    </form>
+        
+</div>
+
+{% endblock body %}
