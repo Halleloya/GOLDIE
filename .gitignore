@@ -10,3 +10,5 @@ __pycache__
 ./envDroit
 *.db
 
+/Droit/data/*
+
