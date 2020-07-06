@@ -6,7 +6,7 @@ If you have any concerns or suggestions, please email lyhao[AT]cs.columbia.edu.
 
 Modification from version one: build a web app, abandon the access control mechanism in the previous version.
 
-We would like to thank Yifan for his contribution on the implementation of the  prototype. 
+We would like to thank Yifan for his valuable input and contribution on the implementation of this  prototype. 
 
 ## How to bootstrap the project
 
