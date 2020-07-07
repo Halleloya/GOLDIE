@@ -370,7 +370,6 @@ def search():
     if location == local_server_name:
         thing_type = request.args.get('thing_type')
         thing_id = request.args.get('thing_id')
-        print ("location, thingtype, thing_id: ", location, thing_type, thing_id)
         # clean empty input string
         thing_type = None if not thing_type or not thing_type.strip() else thing_type.strip()
         thing_id = None if not thing_id or not thing_id.strip() else thing_id.strip()
@@ -437,7 +436,6 @@ def delete():
 
     location = request.args.get('location')
     thing_id = request.args.get('thing_id')
-    print ("location and thingid: ", location, thing_id)
     if not location or not thing_id or not location.strip() or not location.strip():
         return ('', 200)
 
@@ -664,6 +662,8 @@ def custom_query():
         filter_map = {}
         # add geographical filter condition
         if "polygon" in filters and type(filters["polygon"]) == list and len(filters["polygon"]) >= 3:
+            # properties__geo__coordinates represents field properties.geo.coordinates
+            # geo_within_polygon: query string for geospatial query
             filter_map["properties__geo__coordinates__geo_within_polygon"] = filters.pop("polygon")
             # An example of mongodb query is: db.td.find({ "properties.geo.coordinates": { $geoWithin: {$polygon: [[-75,40],[-75,41],[-70,41],[-70,40]]}}})
 
@@ -672,22 +672,31 @@ def custom_query():
 
         try:
             thing_list = json.loads(ThingDescription.objects(thing_type=thing_type, **filter_map).to_json())
-            
         except:
             return jsonify({"reason": "filter condition error."}), 400
 
         # 3. get children result.
+        # "_sub_dir" field checks whether current directory is a recursive node
+        # if this field is true, which means the request must return a compressed thing list results
+        # otherwise, return the final aggregation result
         is_sub_dir = "_sub_dir" in script_json
         script_json["_sub_dir"] = True  # Give hint to children directory
+        # delete the "location" field in the query string, then each children will treat themselves as the target dir
         if "location" in script_json:
             del script_json["location"]
         children_result_list = get_children_result(thing_type, url_for(
             "api.custom_query"), f"data={json.dumps(script_json)}")
         thing_list.extend(children_result_list)
         thing_list = deduplicate_by_id(thing_list)
+        #
+        # [{id, properties, ..., ..}, {id, propertis..}, {}, {}]
+        # COUNT: [{id1}, {id2}, {id3}, ...]
+        # MIN,MAX,SUM,AVG: [{id, data: a}, {id, data: b}]
         compressed_thing_list = get_compressed_list(thing_list, operation, data_field)
 
         # 4. return data
+        # return the aggregation result if current directory is the root
+        # otherwise return the compressed list
         if not is_sub_dir:
             return jsonify(get_final_aggregation(compressed_thing_list, operation)), 200
         else:

@@ -1,3 +1,8 @@
+"""
+The classses defined in this file is comprehensively used in OpenID Connect work flow.
+While the User class is also served as the ORM class in the local user management, all other
+classes (except the UserAccountTypeEnum) is required by the Authlib library to represent some object.
+"""
 import enum
 from flask_sqlalchemy import SQLAlchemy
 from flask import current_app as app
@@ -19,26 +24,32 @@ from authlib.oauth2.rfc6749.grants import (
 
 auth_db = SQLAlchemy()
 
+
 class UserAccountTypeEnum(enum.Enum):
-    """
-    Enumeration list about the user's register type
+    """Enumeration class to represent the user's information
+
+    When the user is registered locally, the value should be 'local'
+    When the user is logged in via OpenID Connect, the value should be 'oidc'
     """
     local = 0
     oidc = 1
 
 
 class User(auth_db.Model, UserMixin):
-    """
-    User object, it can be register locally, or created by OpenID Connect
+    """ORM class that represents the user table
+
+    The user class is used for local user management (register, login) and also
+    openid user login
     """
 
+    # specify the corresponding table name
     __tablename__ = 'user'
 
-    id = auth_db.Column(auth_db.Integer, primary_key = True)
-    username = auth_db.Column(auth_db.String(30), nullable = False)
-    email = auth_db.Column(auth_db.String(35), unique = True, nullable = False)
+    id = auth_db.Column(auth_db.Integer, primary_key=True)
+    username = auth_db.Column(auth_db.String(30), nullable=False)
+    email = auth_db.Column(auth_db.String(35), unique=True, nullable=False)
     # if the user is loggedin using oidc, the password is random assigned
-    password = auth_db.Column(auth_db.Text, nullable = False)  
+    password = auth_db.Column(auth_db.Text, nullable=False)
     account_type = auth_db.Column(auth_db.Enum(UserAccountTypeEnum))
     provider_name = auth_db.Column(auth_db.String(80))
 
@@ -46,50 +57,27 @@ class User(auth_db.Model, UserMixin):
         return f"Name: {self.username}, Email:{self.email}"
 
     def get_user_id(self):
-        """
-        Used by authlib
+        """A user identification method required by authlib
+
+        the user's unique identifier must be returned, in order to check the identity
         """
         return self.id
 
     def get_id(self):
-        """
-        Return unicode user identifier, used by flask-login
+        """A user identification method required by flask-login
+
+        the user's unique identifier must be returned in unicode format, in order to
+        identify the user
         """
         return int_to_unicode(self.id)
 
 
-
-# class OIDCProvider(auth_db.Model):
-#     """
-#     Representing a known OIDC Provider
-#     """
-#     __tablename__ = "oauth2_provider"
-
-#     id = auth_db.Column(auth_db.Integer, primary_key = True)
-#     name = auth_db.Column(auth_db.String(50), unique = True, nullable = False)
-#     client_id = auth_db.Column(auth_db.String(200))
-#     client_secret = auth_db.Column(auth_db.String(200))
-#     access_token_url = auth_db.Column(auth_db.String(200))
-#     authorize_url= auth_db.Column(auth_db.String(200))
-#     # api_base_url='http://localhost:5000/api',
-#     # access_token_params=None,
-#     # authorize_params=None,
-#     scope
-#     client_id='T3GXMIk0hnYYAAWqlfWxW2sT',
-#     client_secret='VtUZc0KxO4eNSOIqIhQXNBBwKykw57II9ERiQpcOjPombZiz',
-#     access_token_url='http://localhost:5000/oauth/token',
-#     access_token_params=None,
-#     authorize_url='http://localhost:5000/oauth/authorize',
-#     authorize_params=None,
-#     api_base_url='http://localhost:5000/api',
-#     client_kwargs={
-#         'scope': 'openid profile',
-#         'token_endpoint_auth_method': 'client_secret_basic'}
-
-
 class OAuth2Client(auth_db.Model, OAuth2ClientMixin):
-    """
-    OAuth2/OpenID Connect client application class
+    """OAuth2/OpenID Connect client application class
+
+    The client class is manipulated by authlib library, each object represents
+    a single OAuth2 client application. It is also a ORM class that mapping the
+    table in database to a python object
     """
 
     __tablename__ = 'oauth2_client'
@@ -101,10 +89,12 @@ class OAuth2Client(auth_db.Model, OAuth2ClientMixin):
 
 
 class OAuth2AuthorizationCode(auth_db.Model, OAuth2AuthorizationCodeMixin):
+    """OAuth2 Authorization code class
+
+    This is a ORM class that represents a single authorization code
+    The code is initially returned by the provider after successful consent
     """
-    Representation of OAuth2 Authorization Code Grant Type
-    This is used to register at server end to support this code flow
-    """
+
     __tablename__ = 'oauth2_code'
 
     id = auth_db.Column(auth_db.Integer, primary_key=True)
@@ -113,14 +103,14 @@ class OAuth2AuthorizationCode(auth_db.Model, OAuth2AuthorizationCodeMixin):
     user = auth_db.relationship('User')
 
 
-
 class OAuth2Token(auth_db.Model, OAuth2TokenMixin):
-    """
-    Representing the real token (Access Token, Refresh Token) in OAuth2 flow
+    """Representing the real token (Access Token, Refresh Token) in OAuth2 flow
+
+    This is a ORM class that is used as the token object
     """
     __tablename__ = 'oauth2_token'
 
-    id = auth_db.Column(auth_db.Integer, primary_key = True)
+    id = auth_db.Column(auth_db.Integer, primary_key=True)
     name = auth_db.Column(auth_db.String(length=40))
     token_type = auth_db.Column(auth_db.String(length=40))
     access_token = auth_db.Column(auth_db.String(length=200))
@@ -141,14 +131,19 @@ class OAuth2Token(auth_db.Model, OAuth2TokenMixin):
             id_token=self.id_token,
             expires_at=self.expires_at,
             expires_in=self.expires_in,
-            scope = self.scope,
-            name = self.name
+            scope=self.scope,
+            name=self.name
         )
 
+
 class AuthorizationCodeGrant(_AuthorizationCodeGrant):
+    """Representation of OAuth2 Authorization Code Grant Type
+
+    The configuration of OAuth2 providers requires the allowed code flow to be specified.
+    The Authorization code flow is the norm for using OAuth2.0, and this class is the config
+    class for such flow.
     """
-    Auth Code Grant
-    """
+
     def create_authorization_code(self, client, grant_user, request):
         code = gen_salt(48)
         # nonce = request.data.get('nonce')
@@ -179,22 +174,31 @@ class AuthorizationCodeGrant(_AuthorizationCodeGrant):
 
 
 class OpenIDCode(_OpenIDCode):
-    """
-    Representing the OpenID Token
+    """A ORM class that represents the ID token in the OpenID Connect process
+
+    The class is different from the OAuth2Token, while the later one represents
+    a general token(Access token, refresh token) used in most OAuth2.0 work flow
     """
 
     def exists_nonce(self, nonce, request):
-        """
-        For this implementation, we will not determine whether the nonce is already seen
-        so simply return False
+        """Check whether the nonce is is already used
+
+        For this implementation, the validation of nonce is ignored,
+        so this method always returns False
+
+        Usually the nonce examination should be done in the database, using the client's
+        id and the nonce parameter as the filter condition. Such as the following code
+            exists = OAuth2AuthorizationCode.query.filter_by(
+                client_id=request.client_id, nonce=nonce
+            ).first()
+            return bool(exists)
         """
         return False
-        # exists = OAuth2AuthorizationCode.query.filter_by(
-        #     client_id=request.client_id, nonce=nonce
-        # ).first()
-        # return bool(exists)
 
     def get_jwt_config(self, grant):
+        """Return the configuration of the JWT token header
+
+        """
         app_jwt_config = {
             'key': app.config["OAUTH2_JWT_KEY"],
             'alg': app.config["OAUTH2_JWT_ALG"],
@@ -204,29 +208,32 @@ class OpenIDCode(_OpenIDCode):
         return app_jwt_config
 
     def generate_user_info(self, user, scope):
-        """
-        Generate the user information that will be used to encode the ID token
-        The allowed properties are:
+        """Generate the user information that will be used to encode the ID token
+
+        A 'UserInfo' object must be returned to specify the related user's information
+        The class is provided by authlib library, and only the following properties
+        are allowed to provide user's information.
+
         [
              'sub', 'name', 'given_name', 'family_name', 'middle_name', 'nickname',
              'preferred_username', 'profile', 'picture', 'website', 'email',
              'email_verified', 'gender', 'birthdate', 'zoneinfo', 'locale',
              'phone_number', 'phone_number_verified', 'address', 'updated_at',
         ]
+        For more details, please refer to authlib documentation or UserInfo's definition
         """
-        return UserInfo(sub=str(user.id), username=user.username, email = user.email)
-
+        return UserInfo(sub=str(user.id), username=user.username, email=user.email)
 
 
 def int_to_unicode(number):
-    """
-    Convert the integer 'number' to 'unicode' str
+    """Convert the integer 'number' to 'unicode' str
+
     """
     return chr(number)
 
 
 def unicode_to_int(unicode_str):
-    """
-    Convert the unicode 'unicode_str' to corresponding integer
+    """Convert the unicode 'unicode_str' to corresponding integer
+
     """
     return ord(unicode_str)
