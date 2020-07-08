@@ -21,8 +21,8 @@ providers_config = {
     # providers for level1 directory.
     "level1": {
         "level2": {
-            "client_id": 'PNSwUf7fdTzycfeYHZLyRyvy',
-            "client_secret": 'vMfmbouM86eLkOEtw38lS2gohkfwNHqR9DvVfAx6tEI4eddv',
+            "client_id": 'K9QDpNBHJMC49JD7bEAmTADl',
+            "client_secret": 'JP4AnDG8kJTr6cVmNwkgSwzCgLue003hPoqPfGx8sfup3Diq',
             "access_token_url": 'http://localhost:5002/auth/oidc_token',
             "access_token_params": None,
             "authorize_url": 'http://localhost:5002/auth/oidc_authorize',

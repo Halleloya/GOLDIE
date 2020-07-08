@@ -232,7 +232,7 @@ def login():
             login_user(user, remember=user_form.remember_me)
             # check whether it's from authorize page. If so, redirect back, with same request parameters
             if "oauth_authorization" in request.args:
-                return redirect(url_for('auth.oidc_authorize', **request.args))
+                return redirect(url_for('auth.oidc_consent_authorize', **request.args))
             else:
                 # local login, redirect to home page
                 return redirect(url_for('home.index'))
