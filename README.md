@@ -87,3 +87,10 @@ You can use `bash ./Droit/evaluation/init_master` and `bash ./Droit/evaluation/i
 > Delete tv from level5b
 
 `curl -X DELETE "http://192.168.16.79:5000/delete?targetLoc=level5b&id=urn:dev:ops:77777-tv-0001"`
+
+
+## auth
+
+http://localhost:5001/auth/oidc_auth_code/level2
+
+change the providers_config with the client's id and secret 
