@@ -51,44 +51,6 @@ We also provide util programs for using the system.
 You can use `bash ./Droit/evaluation/init_master` and `bash ./Droit/evaluation/init_secondary` to initiate the application nodes on `nuc6` and `nuc7` respectively, which are two physical machines we used to deploy our system.
 
 
-### Without access control
-
-> Registers a private TV at level5 (e.g. campus server)
-
-`curl http://192.168.16.79:5000/register -X POST -d '{"targetLoc":"level5", "td":{"_type": "tv", "id": "urn:dev:ops:77777-tv-0001"}}' -H "Content-Type:application/json"`
-
-> Registers a publc train at level5b (e.g. mta server), sets its publicity to be 1
-
-`curl http://192.168.16.79:5001/register -X POST -d '{"targetLoc":"level5b", "td":{"_type": "train", "publicity": 1, "id": "urn:dev:ops:77777-train-0001"}}' -H "Content-Type:application/json"`
-
-> Searches this TV with its location and type
-
-`curl "http://192.168.16.79:5000/searchByLocType?loc=level5&type=tv"`
-
-> Searches the TV with its loccation and ID
-
-`curl "http://192.168.16.79:5000/searchByLocId?loc=level5&id=urn:dev:ops:77777-tv-0001"`
-
-> Searches the the public train at level 2 (none) and 4b (the train registered). Note that by default, the item registered is private (publicity=0 and only expose to the registered directory).
-
-`curl "http://192.168.16.79:5000/searchPublic?loc=level2"`
-
-`curl "http://192.168.16.79:5000/searchPublic?loc=level4"`
-
-> Relocates the TV from level5 to level5b
-
-`curl -X PUT "http://192.168.16.79:5000/relocate?fromLoc=level5&toLoc=level5b&id=urn:dev:ops:77777-tv-0001"`
-
-> Search tv at level5, no tv anymore; search tv at level5b, find the tv
-
-`curl "http://192.168.16.79:5000/searchByLocType?loc=level5&type=tv"`
-`curl "http://192.168.16.79:5000/searchByLocType?loc=level5b&type=tv"`
-
-> Delete tv from level5b
-
-`curl -X DELETE "http://192.168.16.79:5000/delete?targetLoc=level5b&id=urn:dev:ops:77777-tv-0001"`
-
-
 ## auth
 
 http://localhost:5001/auth/oidc_auth_code/level2
