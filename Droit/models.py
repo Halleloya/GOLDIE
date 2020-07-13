@@ -17,6 +17,7 @@ class ThingDescription(DynamicDocument):
     meta = {
         'collection': 'td',
         'indexes': [
+            "thing_type",
             [("properties.geo.coordinates", "2dsphere")]
         ]
     }
