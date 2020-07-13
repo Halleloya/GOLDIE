@@ -3,9 +3,11 @@
 # flask run -h localhost -p 5001
 
 python3 run.py --level=level1 &
-python3 run.py --level=level2 &
-python3 run.py --level=level3 &
-python3 run.py --level=level4a &
-python3 run.py --level=level4b &
-python3 run.py --level=level5a &
-python3 run.py --level=level5b
+python3 run.py --level=level2a &
+python3 run.py --level=level2b &
+python3 run.py --level=level3aa &
+python3 run.py --level=level3ab &
+python3 run.py --level=level4aba &
+python3 run.py --level=level4abb &
+python3 run.py --level=level5abba &
+python3 run.py --level=level5abbb

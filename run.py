@@ -11,7 +11,7 @@ from config import dev_config
 @click.option('--init-db', default=True, type=bool, help="Clean previous data and insert URL mappings into database.\nBy default it's True")
 @click.option('--debug', default=True, type=bool, help="Use Debug Mode.\nBy default it's True.")
 @click.option('--host', default='localhost', type=str, help="The host that this app is running on.\n By default it is localhost")
-@click.option('--level', default='level1', type=click.Choice(['level1','level2','level3','level4a','level4b','level5a','level5b'], case_sensitive=False), 
+@click.option('--level', default='level1', type=click.Choice(['level1','level2a','level2b','level3aa','level3ab','level4aba','level4abb','level5abba','level5abbb'], case_sensitive=False), 
                     help = "Specify which directory to run.\nBy default its the level1.\n If the mode is 'all', this argument will be ignored.")
 def main(level, init_db, debug, host):
     """

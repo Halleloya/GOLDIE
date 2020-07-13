@@ -20,7 +20,7 @@ afterward and persistent into databases for long-term reuse.
 providers_config = {
     # providers for level1 directory.
     "level1": {
-        "level2": {
+        "level2a": {
             "client_id": 'K9QDpNBHJMC49JD7bEAmTADl',
             "client_secret": 'JP4AnDG8kJTr6cVmNwkgSwzCgLue003hPoqPfGx8sfup3Diq',
             "access_token_url": 'http://localhost:5002/auth/oidc_token',
@@ -31,6 +31,9 @@ providers_config = {
             "client_kwargs": {
                 'scope': 'openid profile',
                 'token_endpoint_auth_method': 'client_secret_basic'}
+        },
+        "level2b": {
+
         },
         "level3": {
 

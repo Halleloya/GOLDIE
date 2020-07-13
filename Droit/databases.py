@@ -23,48 +23,62 @@ def init_dir_to_url(level: str) -> None:
     if level == "level1":
         DirectoryNameToURL(directory_name='master',
                            url=f'http://localhost:5001', relationship='master').save()
-        DirectoryNameToURL(directory_name='level2',
+        DirectoryNameToURL(directory_name='level2a',
                            url='http://localhost:5002', relationship='child').save()
-    elif level == 'level2':
+        DirectoryNameToURL(directory_name='level2b',
+                           url='http://localhost:5003', relationship='child').save()
+    elif level == 'level2a':
         DirectoryNameToURL(directory_name='master',
                            url=f'http://localhost:5001', relationship='master').save()
         DirectoryNameToURL(directory_name='level1',
                            url=f'http://localhost:5001', relationship='parent').save()
-        DirectoryNameToURL(directory_name='level3',
-                           url=f'http://localhost:5003', relationship='child').save()
-    elif level == 'level3':
-        DirectoryNameToURL(directory_name='master',
-                           url=f'http://localhost:5001', relationship='master').save()
-        DirectoryNameToURL(directory_name='level2',
-                           url=f'http://localhost:5002', relationship='parent').save()
-        DirectoryNameToURL(directory_name='level4a',
+        DirectoryNameToURL(directory_name='level3aa',
                            url=f'http://localhost:5004', relationship='child').save()
-        DirectoryNameToURL(directory_name='level4b',
+        DirectoryNameToURL(directory_name='level3ab',
                            url=f'http://localhost:5005', relationship='child').save()
-    elif level == 'level4a':
+    elif level == 'level2b':
         DirectoryNameToURL(directory_name='master',
                            url=f'http://localhost:5001', relationship='master').save()
-        DirectoryNameToURL(directory_name='level3',
-                           url=f'http://localhost:5003', relationship='parent').save()
-        DirectoryNameToURL(directory_name='level5a',
+        DirectoryNameToURL(directory_name='level1',
+                           url=f'http://localhost:5001', relationship='parent').save()
+    elif level == 'level3aa':
+        DirectoryNameToURL(directory_name='master',
+                           url=f'http://localhost:5001', relationship='master').save()
+        DirectoryNameToURL(directory_name='level2a',
+                           url=f'http://localhost:5002', relationship='parent').save()
+    elif level == 'level3ab':
+        DirectoryNameToURL(directory_name='master',
+                           url=f'http://localhost:5001', relationship='master').save()
+        DirectoryNameToURL(directory_name='level2a',
+                           url=f'http://localhost:5002', relationship='parent').save()
+        DirectoryNameToURL(directory_name='level4aba',
                            url=f'http://localhost:5006', relationship='child').save()
-    elif level == 'level4b':
-        DirectoryNameToURL(directory_name='master',
-                           url=f'http://localhost:5001', relationship='master').save()
-        DirectoryNameToURL(directory_name='level3',
-                           url=f'http://localhost:5003', relationship='parent').save()
-        DirectoryNameToURL(directory_name='level5b',
+        DirectoryNameToURL(directory_name='level4abb',
                            url=f'http://localhost:5007', relationship='child').save()
-    elif level == 'level5a':
+    elif level == 'level4aba':
         DirectoryNameToURL(directory_name='master',
                            url=f'http://localhost:5001', relationship='master').save()
-        DirectoryNameToURL(directory_name='level4a',
-                           url=f'http://localhost:5004', relationship='parent').save()
-    elif level == 'level5b':
-        DirectoryNameToURL(directory_name='master',
-                           url=f'http://localhost:5001', relationship='master').save()
-        DirectoryNameToURL(directory_name='level4b',
+        DirectoryNameToURL(directory_name='level3ab',
                            url=f'http://localhost:5005', relationship='parent').save()
+    elif level == 'level4abb':
+        DirectoryNameToURL(directory_name='master',
+                           url=f'http://localhost:5001', relationship='master').save()
+        DirectoryNameToURL(directory_name='level3ab',
+                           url=f'http://localhost:5005', relationship='parent').save()
+        DirectoryNameToURL(directory_name='level5abba',
+                           url=f'http://localhost:5008', relationship='child').save()
+        DirectoryNameToURL(directory_name='level5abbb',
+                           url=f'http://localhost:5009', relationship='child').save()
+    elif level == 'level5abba':
+        DirectoryNameToURL(directory_name='master',
+                           url=f'http://localhost:5001', relationship='master').save()
+        DirectoryNameToURL(directory_name='level4abb',
+                           url=f'http://localhost:5007', relationship='parent').save()
+    elif level == 'level5abbb':
+        DirectoryNameToURL(directory_name='master',
+                           url=f'http://localhost:5001', relationship='master').save()
+        DirectoryNameToURL(directory_name='level4abb',
+                           url=f'http://localhost:5007', relationship='parent').save()
 
 
 def init_target_to_child_name(level: str) -> None:
@@ -74,24 +88,19 @@ def init_target_to_child_name(level: str) -> None:
         level(str): it specifies the level of current directory
     """
     if level == 'level1':
-        TargetToChildName(target_name='level3', child_name='level2').save()
-        TargetToChildName(target_name='level4a', child_name='level2').save()
-        TargetToChildName(target_name='level4b', child_name='level2').save()
-        TargetToChildName(target_name='level5a', child_name='level2').save()
-        TargetToChildName(target_name='level5b', child_name='level2').save()
-    elif level == 'level2':
-        TargetToChildName(target_name='level4a', child_name='level3').save()
-        TargetToChildName(target_name='level4b', child_name='level3').save()
-        TargetToChildName(target_name='level5a', child_name='level3').save()
-        TargetToChildName(target_name='level5b', child_name='level3').save()
-    elif level == 'level3':
-        TargetToChildName(target_name='level5a', child_name='level4a').save()
-        TargetToChildName(target_name='level5b', child_name='level4b').save()
-    elif level == 'level4a':
-        pass
-    elif level == 'level4b':
-        pass
-    elif level == 'level5a':
-        pass
-    elif level == 'level5b':
+        TargetToChildName(target_name='level3aa', child_name='level2a').save()
+        TargetToChildName(target_name='level3ab', child_name='level2a').save()
+        TargetToChildName(target_name='level4aba', child_name='level2a').save()
+        TargetToChildName(target_name='level4abb', child_name='level2a').save()
+        TargetToChildName(target_name='level5abba', child_name='level2a').save()
+        TargetToChildName(target_name='level5abbb', child_name='level2a').save()
+    elif level == 'level2a':
+        TargetToChildName(target_name='level4aba', child_name='level3ab').save()
+        TargetToChildName(target_name='level4bbb', child_name='level3ab').save()
+        TargetToChildName(target_name='level5abba', child_name='level3ab').save()
+        TargetToChildName(target_name='level5abbb', child_name='level3ab').save()
+    elif level == 'level3ab':
+        TargetToChildName(target_name='level5abba', child_name='level4abb').save()
+        TargetToChildName(target_name='level5abbb', child_name='level4abb').save()
+    else:
         pass
