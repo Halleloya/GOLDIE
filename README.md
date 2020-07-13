@@ -13,42 +13,30 @@ We would like to thank Yifan for his valuable input and contribution on the impl
 1. `git clone git@github.com:Halleloya/Droit_v2.git`.
 2. Install dependencies `pip install -r requirements.txt`.
 3. Configure the database, e.g., store your database in data/db, and `mongod --dbpath data/db`
-4. Run the shell. 
+4. Run the shell `python runall.py`. 
 
 Sidenotes:
 
 To run a local directory `python -m Droit.run`
 
-To initialize database and start the application server as one go, use `./setup.sh` in `/Droit/src` (applied to a single server).
-
-To initialize database at an application server, use `python3 -m Droit.level1.init_db`.
-
-To initialize database at access-control server, use `python3 -m Droit.access.init_db`.
-
 Please note that you are supposed to change the [ip] and [port] manually. 
 
-## A simple walk-through (by default)
+## A sample walk-through 
+
+Below we show a sample walk-through with the tree-like structure.
 
 ```
-    0(1) 
-    |
-    1(2)
-    | 
-    0(3)
-  /   \
-1(4)   1(4b)
-|      |
-0(5)   0(5b)
+level1
+level2a level2b
+level3aa level3ab level3ba level3bb
+level4aaa level4aab level4aba level4abb level4baa level4bab level4bba level4bbb  
+level5aaaa level5aaab ...
+level6aaaaa level6aaaab ...
 ```
-
-0: nuc6
-1: nuc7
 
 ### Utils
 
 We also provide util programs for using the system.
-
-You can use `bash ./Droit/evaluation/init_master` and `bash ./Droit/evaluation/init_secondary` to initiate the application nodes on `nuc6` and `nuc7` respectively, which are two physical machines we used to deploy our system.
 
 
 ## auth
