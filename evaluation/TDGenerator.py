@@ -9,46 +9,41 @@ import json
 import os
 import click
 
-NUMBER_OF_FILE = 10  # the number of TD files to generate - other three types following
-NUMBER_OF_LIGHT = 10  # script: count the number of lights which are turnned on
-NUMBER_OF_THERMOMETER = 10  # script: count the temperature in Columbia
-NUMBER_OF_BUS = 10  # script: count the number of buses running inside a polygon
-
 propertyList = ["P1", "P2", "P3", "P4", "P5", "P6", "P7"]
 actionList = ["A1", "A2", "A3", "A4", "A5", "A6", "A7"]
 eventList = ["This is event 1", "This is event 2", "This is event 3",
              "This is event 4"]  # Event is not important for the test purpose
 
 @click.command()
-@click.option('--num_file', default=10, type=int, help="number of random test files, by default is 10")
-@click.option('--num_light', default=10, type=int, help="number of random test files, by default is 10")
-@click.option('--num_thermo', default=10, type=int, help="number of random test files, by default is 10")
-@click.option('--num_bus', default=10, type=int, help="number of random test files, by default is 10")
+@click.option('--num_file', default=100, type=int, help="number of random test files, by default is 10")
+@click.option('--num_light', default=100, type=int, help="number of random test files, by default is 10")
+@click.option('--num_thermo', default=100, type=int, help="number of random test files, by default is 10")
+@click.option('--num_bus', default=100, type=int, help="number of random test files, by default is 10")
 def main(num_file, num_light, num_thermo, num_bus):
     """
     Generate the test TD files
     """
     cnt_file = cnt_light = cnt_thermo = cnt_bus = 1
     while cnt_file <= num_file: # NUMBER_OF_FILE:
-        td = generateOnto()
+        td = generateOnto(cnt_file)
         fname = "TDfile" + str(cnt_file) + ".json"
         generateFile(td)
         writeFile(fname, td)
         cnt_file += 1
     while cnt_light <= num_light: # NUMBER_OF_LIGHT:
-        td = generateOnto()
+        td = generateOnto(cnt_light + num_file)
         fname = "TDLight" + str(cnt_light) + ".json"
         generateLight(td)
         writeFile(fname, td)
         cnt_light += 1
     while cnt_thermo <= num_thermo: # NUMBER_OF_THERMOMETER:
-        td = generateOnto()
+        td = generateOnto(cnt_thermo + num_file + num_light)
         fname = "TDThermo" + str(cnt_thermo) + ".json"
         generateThermo(td)
         writeFile(fname, td)
         cnt_thermo += 1
     while cnt_bus <= num_bus: # NUMBER_OF_BUS:
-        td = generateOnto()
+        td = generateOnto(cnt_bus + num_file + num_light + num_thermo)
         fname = "TDBus" + str(cnt_bus) + ".json"
         generateBus(td)
         writeFile(fname, td)
@@ -152,11 +147,11 @@ def generateFile(td):
     return td
 
 
-def generateOnto():
+def generateOnto(tdid):
     td = {}
     td["@context"] = "https://www.w3.org/2019/wot/td/v1"
-    ran_id = ''.join(random.sample(string.ascii_letters + string.digits, 8))
-    td["id"] = "urn:dev:wot:com:example:servient:%s" % ran_id
+    # ran_id = ''.join(random.sample(string.ascii_letters + string.digits, 8))
+    td["id"] = f"urn:dev:wot:com:example:servient:{tdid}" # "urn:dev:wot:com:example:servient:%s" % ran_id
     ran_name = ''.join(random.sample(string.ascii_letters + string.digits, 6))
     td["title"] = "%s" % ran_name
     td["@type"] = "thing"
