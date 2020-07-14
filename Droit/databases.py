@@ -10,6 +10,7 @@ def clear_database() -> None:
     ThingDescription.drop_collection()
     DirectoryNameToURL.drop_collection()
     TypeToChildrenNames.drop_collection()
+    TargetToChildName.drop_collection()
 
 
 def init_dir_to_url(level: str) -> None:
@@ -96,7 +97,7 @@ def init_target_to_child_name(level: str) -> None:
         TargetToChildName(target_name='level5abbb', child_name='level2a').save()
     elif level == 'level2a':
         TargetToChildName(target_name='level4aba', child_name='level3ab').save()
-        TargetToChildName(target_name='level4bbb', child_name='level3ab').save()
+        TargetToChildName(target_name='level4abb', child_name='level3ab').save()
         TargetToChildName(target_name='level5abba', child_name='level3ab').save()
         TargetToChildName(target_name='level5abbb', child_name='level3ab').save()
     elif level == 'level3ab':

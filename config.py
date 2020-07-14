@@ -141,7 +141,7 @@ class Level4abbDevConfig(DevConfig):
     # OAUth2
     OAUTH2_JWT_ENABLED = True
     OAUTH2_JWT_ISS = 'http://localhost:5007/'
-    OAUTH2_JWT_KEY = 'level4abab-secret'
+    OAUTH2_JWT_KEY = 'level4abb-secret'
     OAUTH2_JWT_ALG = 'HS256'
     OAUTH2_JWT_EXP = 3600
 
