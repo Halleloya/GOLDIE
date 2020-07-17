@@ -183,10 +183,15 @@ def get_children_result(thing_type: str, api: str, query_string: str) -> list:
 
         for descendant_directory_name in descendant_names_with_type.children_names:
             child_url = child_name_to_url_map[descendant_directory_name]
-            tmpstr = query_string.split('&', 1)[1]
-            new_query_string = f"location={descendant_directory_name}&{tmpstr}"
-            request_url = f"{urljoin(child_url, api)}?{new_query_string}"
-            # request_url = f"{urljoin(child_url, api)}?{query_string}"
+            para_dict = dict(k.split('=') for k in query_string.split('&'))
+            if 'location' in para_dict.keys():
+                # tmpstr = query_string.split('&', 1)[1]
+                # new_query_string = f"location={descendant_directory_name}&{tmpstr}"
+                para_dict['location'] = descendant_directory_name
+                new_query_string = urlencode(para_dict)
+                request_url = f"{urljoin(child_url, api)}?{new_query_string}"
+            else:
+                request_url = f"{urljoin(child_url, api)}?{query_string}"
             response = requests.get(request_url)
             if response.status_code != 200:
                 continue
