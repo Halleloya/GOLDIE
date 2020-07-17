@@ -6,7 +6,7 @@ import click
 
 @click.command()
 @click.option('--num_test', default=10, type=int, help="number of random tests, by default is 10")
-@click.option('--location', default="SingleDirectory", type=str, help="directory name you want to search, default is SingleDirectory")
+@click.option('--location', default="level1", type=str, help="directory name you want to search, default is SingleDirectory")
 @click.option('--thing_type', default=None, type=str, help="type of TD you want to search, default is None")
 @click.option('--thing_id', default=None, type=str, help="id of TD you want to search, default is None")
 def main(num_test, location, thing_type, thing_id):
@@ -14,7 +14,7 @@ def main(num_test, location, thing_type, thing_id):
     for i in range (1, num_test+1):
         print (f"----test round {i} ----")
 
-        totalTime += queryThing("SingleDirectory", thing_type, thing_id)
+        totalTime += queryThing(location , thing_type, thing_id)
     avgTime = float(totalTime) / num_test
     print (f"{num_test} queries excuted successfully, average time is {avgTime} s")
     return
@@ -24,7 +24,7 @@ def queryThing(location, thing_type, thing_id):
     query TDs with designated location, type, id
     """
 
-    url = 'http://localhost:4999/api/search'
+    url = 'http://localhost:5001/api/search'
 
     params = {
             "location": location,

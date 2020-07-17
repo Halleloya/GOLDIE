@@ -12,7 +12,7 @@ Test the time to register TDs with publicity=0,1,2...
 
 
 directory_names = ['level1', 'level2a', 'level2b', 'level3aa', 'level3ab', 'level4aba', 'level4abb', 'level5abba', 'level5abbb']
-ports = {'level1':5001, 'level2a':5002, 'level2b':5003, 'level3aa':5004, 'level3ab':5005, 'level4aba':5006, 'level4abb':5007, 'level5abba':5008, 'level5abbb':5009}
+# ports = {'level1':5001, 'level2a':5002, 'level2b':5003, 'level3aa':5004, 'level3ab':5005, 'level4aba':5006, 'level4abb':5007, 'level5abba':5008, 'level5abbb':5009}
 
 
 @click.command()
@@ -51,8 +51,8 @@ def registerThing(tdFile, location, publicity=0):
     """
     read a TD from test file folder
     """
-    port = ports[location]
-    url = f'http://localhost:{port}/api/register'
+    # port = ports[location]
+    url = f'http://localhost:5001/api/register'
     with open (f'TestFiles/{tdFile}.json', 'r', encoding='utf8') as fp:
         td = json.load(fp)
 

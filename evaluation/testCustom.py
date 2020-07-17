@@ -27,7 +27,7 @@ def cusQueryThing(tdFile):
     Aggregation query TDs with customized script
     """
 
-    url = 'http://localhost:4999/api/custom_query'
+    url = 'http://localhost:5001/api/custom_query'
     with open (f'QueryScript/{tdFile}.json', 'r', encoding='utf8') as fp:
         queryScript = json.load(fp)
     print (queryScript, type(queryScript))
