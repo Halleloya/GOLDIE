@@ -51,8 +51,19 @@ providers_config = {
 
         }
     },
-    # providers for level2 directory
-    "level2": {
-
+    # providers for level3aa directory
+    "level3aa": {
+        "level2b": {
+            "client_id": 'sQDK1uX1R62sZf3f9AB0eTJb',
+            "client_secret": 'pkcqeqvYvzKE1zHjhRv30MFVcIDve6b4tZRmmjGf68M0ZmoK',
+            "access_token_url": 'http://localhost:5003/auth/oidc_token',
+            "access_token_params": None,
+            "authorize_url": 'http://localhost:5003/auth/oidc_authorize',
+            "authorize_params": None,
+            "api_base_url": 'http://localhost:5003/api',
+            "client_kwargs": {
+                'scope': 'openid profile',
+                'token_endpoint_auth_method': 'client_secret_basic'}
+        }
     }
 }
