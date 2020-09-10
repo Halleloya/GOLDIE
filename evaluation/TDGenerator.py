@@ -18,7 +18,7 @@ eventList = ["This is event 1", "This is event 2", "This is event 3",
 @click.option('--num_file', default=100, type=int, help="number of random test files, by default is 10")
 @click.option('--num_light', default=100, type=int, help="number of random test files, by default is 10")
 @click.option('--num_thermo', default=100, type=int, help="number of random test files, by default is 10")
-@click.option('--num_bus', default=100, type=int, help="number of random test files, by default is 10")
+@click.option('--num_bus', default=1000, type=int, help="number of random test files, by default is 10")
 def main(num_file, num_light, num_thermo, num_bus):
     """
     Generate the test TD files

@@ -11,15 +11,15 @@ Test the time to register TDs with publicity=0,1,2...
 '''
 
 
-directory_names = ['level1', 'level2a', 'level2b', 'level3aa', 'level3ab', 'level4aba', 'level4abb', 'level5abba', 'level5abbb']
+directory_names = ['SingleDirectory'] # ['level1', 'level2a', 'level2b', 'level3aa', 'level3ab', 'level4aba', 'level4abb', 'level5abba', 'level5abbb']
 # ports = {'level1':5001, 'level2a':5002, 'level2b':5003, 'level3aa':5004, 'level3ab':5005, 'level4aba':5006, 'level4abb':5007, 'level5abba':5008, 'level5abbb':5009}
 
 
 @click.command()
-@click.option('--num_test_bus', default=100, type=int, help="number of bus file, by default is 100")
-@click.option('--num_test_light', default=100, type=int, help="number of light file, by default is 100")
-@click.option('--num_test_thermo', default=100, type=int, help="number of thermometer file, by default is 100")
-@click.option('--num_test_random', default=100, type=int, help="number of random file, by default is 100")
+@click.option('--num_test_bus', default=200, type=int, help="number of bus file, by default is 100")
+@click.option('--num_test_light', default=200, type=int, help="number of light file, by default is 100")
+@click.option('--num_test_thermo', default=200, type=int, help="number of thermometer file, by default is 100")
+@click.option('--num_test_random', default=200, type=int, help="number of random file, by default is 100")
 def main(num_test_bus, num_test_light, num_test_thermo, num_test_random):
     totalTime = 0
     for i in range (1, num_test_bus+1):
@@ -52,7 +52,7 @@ def registerThing(tdFile, location, publicity=0):
     read a TD from test file folder
     """
     # port = ports[location]
-    url = f'http://localhost:5001/api/register'
+    url = f'http://localhost:4999/api/register'
     with open (f'TestFiles/{tdFile}.json', 'r', encoding='utf8') as fp:
         td = json.load(fp)
 
