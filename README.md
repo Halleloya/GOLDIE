@@ -41,7 +41,9 @@ level6aaaaa level6aaaab ...
 
 By default, all the directoires run on localhost. The tree-like structure starts from port 5001, with the name of level1 (also called master directory or root directory). The single directory module named SingleDirectory runs on port 4999.
 
-MongoDB runs on its default port 27017. 
+MongoDB runs on its default port 27017. To run MongoDB on another port: add `--port [port]` when starting the database, and change the configure files to direct apps to database. 
+
+To release all the ports occupied by directories: `sudo kill -9 $(lsof -i:5001 -i:5002 -i:5003 -i:5004 -i:5005 -i:5006 -i:5007 -i:5008 -t)`.
 
 ## Authentication
 
