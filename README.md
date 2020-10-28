@@ -24,6 +24,8 @@ To run a single directory `python -m Droit.run`. It is easy and basically enough
 
 Please note that you are supposed to change the [ip] and [port] manually in the `config.py` file, if needed. 
 
+To disable InsecureTransportError of OAuth2 (as https is required, but run with http in localhost): add `export OAUTHLIB_INSECURE_TRANSPORT=1` to your env/bin/activate, or just input this command everytime restart the virtual environment. Please be noted that you should never do that in your production. 
+
 ## A sample walk-through 
 
 Below we show a sample walk-through with a binary tree-like structure.
