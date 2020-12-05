@@ -1,15 +1,20 @@
 # GOLDIE
 
+
 This repository contains implementation and utility code for Droit project, version 2. 
 
 If you have any concerns or suggestions, please contact us at lyhao[AT]cs.columbia.edu. 
 
-Major modification from the prior version: build a web app and implement federated identity management, abandon the access control mechanism in the previous version. We haven't find a concerete access control mechanism yet.
+## History
 
-## Acknowledgement
-We would like to thank Yifan for his valuable input and contribution on the implementation of this  prototype. 
+This repository used to be named as "Droit_v2". It is changed to "GOLDIE" in accordance with the name in our paper. Therefore, the term "Droit" may appear in the source codes anyway.  
 
-## How to bootstrap the project
+As you can guess, there was a more sketchy and initial version named "Droit". Altough it shares basic insights of GOLDIE, it has been abandoned given some design flaws. Major modifications from that are: we build a web app and implement federated user identity management, however, the access control mechanism has been dropped off. Droit used a capability-based approach for access control with the help of JWT. Given the chanllenges in widely recognizing (i.e., forcing such a model is not very possible) and management (i.e., revoking delegated capabilities is knotty) through that approach, we want to leave it blank at this point (or leave it to each administration actually in GOLDIE).
+
+By the way, we haven't find a concerete access control mechanism in the proposed scenario yet. We are working on it, and hopefully a potential solution will be illustrated in a relevant paper in the near future. 
+
+
+## To bootstrap the project
 
 1. `git clone git@github.com:Halleloya/Droit_v2.git`.
 2. Install dependencies `pip install -r requirements.txt`.
@@ -76,3 +81,7 @@ To illustrate how to configure it, we give an example that level3aa provides a m
 ```
 
 > Now you can login level3aa with your username and password in level2b.
+
+## Acknowledgement
+We would like to thank Yifan for his valuable input and contribution on the implementation of this  prototype. 
+
