@@ -32,10 +32,12 @@ $("#submit").click(function (e) {
     let text = jsonFormatter.getJSONString();
     let location = $("#targetLoc").val();
     let publicity = $("#publicity").val();
+    
     if (text == null || text.trim().length == 0 || location.trim().length == 0) {
         show_prompt("Please Filled All Input Fields", title = 'Alert');
         return;
     }
+    
 
     // get form data, and check whether it's a valid json
     let td_json = null;

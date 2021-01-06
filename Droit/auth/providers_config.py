@@ -64,6 +64,18 @@ providers_config = {
             "client_kwargs": {
                 'scope': 'openid profile',
                 'token_endpoint_auth_method': 'client_secret_basic'}
+        },
+        "level4abb": {
+            "client_id": 'i3td5XHHny5axpgDWlVlS0Mf',
+            "client_secret": 'WKmVwldvRXJfPcHybeVhXWghD8kWrHVCeRYzLpaVtbazgcuG',
+            "access_token_url": 'http://localhost:5007/auth/oidc_token',
+            "access_token_params": None,
+            "authorize_url": 'http://localhost:5007/auth/oidc_authorize',
+            "authorize_params": None,
+            "api_base_url": 'http://localhost:5007/api',
+            "client_kwargs": {
+                'scope': 'openid profile',
+                'token_endpoint_auth_method': 'client_secret_basic'}
         }
     }
 }
