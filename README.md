@@ -5,6 +5,11 @@ This repository contains implementation and utility code for Droit project, vers
 
 If you have any concerns or suggestions, please contact us at lyhao[AT]cs.columbia.edu. 
 
+Please cite the following paper if the project contributes to your work.
+```
+Luoyao Hao and Henning Schulzrinne, "GOLDIE: Harmonization and Orchestration Towards a Global Directory for IoT", IEEE International Conference on Computer Communications (INFOCOM), 2021.
+```
+
 ## History
 
 This repository used to be named as "Droit_v2". It is changed to "GOLDIE" in accordance with the name in our paper. Therefore, the term "Droit" may appear in the source codes anyway.  
