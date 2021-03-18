@@ -21,7 +21,7 @@ By the way, we haven't find a concerete access control mechanism in the proposed
 
 ## To bootstrap the project
 
-1. `git clone git@github.com:Halleloya/Droit_v2.git`.
+1. `git clone git@github.com:Halleloya/GOLDIE.git`.
 2. Install dependencies `pip install -r requirements.txt`.
 3. Configure the database, e.g., store your database in data/db, and `mongod --dbpath Droit/data/db`
 4. Run the shell `python runall.py` or `./run.sh`. It create a simple tree-like structure illustrated in the following section. 
