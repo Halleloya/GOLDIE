@@ -7,7 +7,14 @@ If you have any concerns or suggestions, please contact us at lyhao[AT]cs.columb
 
 Please cite the following paper if the project contributes to your work.
 ```
-Luoyao Hao and Henning Schulzrinne, "GOLDIE: Harmonization and Orchestration Towards a Global Directory for IoT", IEEE International Conference on Computer Communications (INFOCOM), 2021.
+@inproceedings{hao2021goldie,
+  title={GOLDIE: Harmonization and Orchestration Towards a Global Directory for IoT},
+  author={Hao, Luoyao and Schulzrinne, Henning},
+  booktitle={IEEE Conference on Computer Communications (INFOCOM)},
+  pages={1--10},
+  year={2021},
+  organization={IEEE}
+}
 ```
 
 ## History
